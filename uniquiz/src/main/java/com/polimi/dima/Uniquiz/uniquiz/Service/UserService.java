@@ -3,6 +3,8 @@ package com.polimi.dima.Uniquiz.uniquiz.Service;
 import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.LoginRequest;
+import com.polimi.dima.Uniquiz.uniquiz.Model.Response;
+import com.polimi.dima.Uniquiz.uniquiz.Model.ResponseValidity;
 import com.polimi.dima.Uniquiz.uniquiz.Model.User;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,11 +24,14 @@ public class UserService {
         var savedEntity=repository.save(entity);
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
-    public User login(LoginRequest loginRequest){
+    public Response login(LoginRequest loginRequest){
         var entity= repository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
-        if(entity.isPresent())
-            return UserMapper.INSTANCE.fromEntity(entity.get());
-        else return null;
+        User user = null;
+        if(entity.isPresent()){
+            user = UserMapper.INSTANCE.fromEntity(entity.get());
+            return new Response(ResponseValidity.VALID, user);
+        }
+        else return new Response(ResponseValidity.NOTVALID, user);
     }
 
     public User getUserById(String id){

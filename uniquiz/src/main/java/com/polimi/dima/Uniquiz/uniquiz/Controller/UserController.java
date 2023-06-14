@@ -1,6 +1,7 @@
 package com.polimi.dima.Uniquiz.uniquiz.Controller;
 
 import com.polimi.dima.Uniquiz.uniquiz.Model.LoginRequest;
+import com.polimi.dima.Uniquiz.uniquiz.Model.Response;
 import com.polimi.dima.Uniquiz.uniquiz.Model.User;
 import com.polimi.dima.Uniquiz.uniquiz.Service.UserService;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class UserController {
         return service.registration(user);
     }
     @PostMapping("/login")
-    public User login(@RequestBody LoginRequest loginRequest){
+    public Response login(@RequestBody LoginRequest loginRequest){
         return service.login(loginRequest);
     }
 
