@@ -11,9 +11,9 @@ public class UniversityController {
 
     private final UniversityService service;
 
-    @GetMapping("/university/{id}")
-    public University getUserById(@PathVariable String id){
-        return service.getUniverisityById(id);
+    @GetMapping("/university/{universityId}")
+    public University getUniversityById(@PathVariable String universityId){
+        return service.getUniverisityById(universityId);
     }
 
     @PostMapping("/registerUni")
