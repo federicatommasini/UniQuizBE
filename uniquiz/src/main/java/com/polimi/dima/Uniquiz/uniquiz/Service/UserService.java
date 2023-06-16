@@ -21,11 +21,11 @@ public class UserService {
 
     public User registration(User user){
         var entity = UserMapper.INSTANCE.toEntity(user);
-        var savedEntity=repository.save(entity);
+        var savedEntity = repository.save(entity);
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
     public Response login(LoginRequest loginRequest){
-        var entity= repository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
+        var entity = repository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
         User user = null;
         if(entity.isPresent()){
             user = UserMapper.INSTANCE.fromEntity(entity.get());
@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public User getUserById(String id){
-        var entity= repository.findById(id);
+        var entity = repository.findById(id);
         if(entity.isPresent())
             return UserMapper.INSTANCE.fromEntity(entity.get());
         else return null;
@@ -45,4 +45,6 @@ public class UserService {
         List<UserEntity> users = repository.findAll();
         return users.stream().map(u-> UserMapper.INSTANCE.fromEntity(u)).collect(Collectors.toList());
     }
+
+
 }
