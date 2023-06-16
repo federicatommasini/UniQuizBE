@@ -1,7 +1,6 @@
 package com.polimi.dima.Uniquiz.uniquiz.Repository;
 
 import com.polimi.dima.Uniquiz.uniquiz.Domain.UniversityEntity;
-import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

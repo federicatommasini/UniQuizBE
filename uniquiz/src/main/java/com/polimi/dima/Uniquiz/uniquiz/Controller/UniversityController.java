@@ -1,7 +1,6 @@
 package com.polimi.dima.Uniquiz.uniquiz.Controller;
 
 import com.polimi.dima.Uniquiz.uniquiz.Model.University;
-import com.polimi.dima.Uniquiz.uniquiz.Model.User;
 import com.polimi.dima.Uniquiz.uniquiz.Service.UniversityService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

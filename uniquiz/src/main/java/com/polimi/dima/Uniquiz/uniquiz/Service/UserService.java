@@ -36,14 +36,12 @@ public class UserService {
 
     public User getUserById(String id){
         var entity = repository.findById(id);
-        if(entity.isPresent())
-            return UserMapper.INSTANCE.fromEntity(entity.get());
-        else return null;
+        return entity.map(UserMapper.INSTANCE::fromEntity).orElse(null);
     }
 
     public List<User> getUsers(){
         List<UserEntity> users = repository.findAll();
-        return users.stream().map(u-> UserMapper.INSTANCE.fromEntity(u)).collect(Collectors.toList());
+        return users.stream().map(UserMapper.INSTANCE::fromEntity).collect(Collectors.toList());
     }
 
 

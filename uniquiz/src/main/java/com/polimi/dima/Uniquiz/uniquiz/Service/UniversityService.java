@@ -1,9 +1,7 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.UniversityMapper;
-import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.University;
-import com.polimi.dima.Uniquiz.uniquiz.Model.User;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.UniversityRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
