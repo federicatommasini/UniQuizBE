@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,4 +25,11 @@ public class SubjectService {
         List<SubjectEntity> subjects = repository.findAll();
         return subjects.stream().map(s-> SubjectMapper.INSTANCE.fromEntity(s)).collect(Collectors.toList());
     }
+
+    public Subject getSubjectById(String id){
+        Optional<SubjectEntity> subject = repository.findById(id);
+        return subject.map(SubjectMapper.INSTANCE::fromEntity).orElse(null);
+    }
+
+
 }

@@ -1,16 +1,18 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
+import com.polimi.dima.Uniquiz.uniquiz.Domain.SubjectEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
+import com.polimi.dima.Uniquiz.uniquiz.Mappers.SubjectMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
-import com.polimi.dima.Uniquiz.uniquiz.Model.LoginRequest;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Response;
-import com.polimi.dima.Uniquiz.uniquiz.Model.ResponseValidity;
-import com.polimi.dima.Uniquiz.uniquiz.Model.User;
+import com.polimi.dima.Uniquiz.uniquiz.Model.*;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private UserRepository repository;
+    private SubjectService subjectService;
 
     public User registration(User user){
         var entity = UserMapper.INSTANCE.toEntity(user);
@@ -43,6 +46,16 @@ public class UserService {
         List<UserEntity> users = repository.findAll();
         return users.stream().map(UserMapper.INSTANCE::fromEntity).collect(Collectors.toList());
     }
+    public List<Subject> getSubjects(String userId){
+        User user = getUserById(userId);
+        if (user != null) {
+            List<Subject> subjects = new ArrayList<Subject>();
+            for(String subjectId : user.getSubjectIds()){
+                subjects.add(subjectService.getSubjectById(subjectId));
+            }
 
-
+            return subjects;
+        }
+        return null;
+    }
 }

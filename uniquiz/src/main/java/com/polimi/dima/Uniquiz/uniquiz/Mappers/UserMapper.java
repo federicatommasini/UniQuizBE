@@ -8,6 +8,8 @@ import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.Optional;
+
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
@@ -15,7 +17,4 @@ public interface UserMapper {
     User fromEntity(UserEntity entity);
 
     UserEntity toEntity(User model);
-
-    UserEntity updateEntity(@MappingTarget UserEntity entity, User user);
-
 }

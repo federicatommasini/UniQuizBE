@@ -1,15 +1,13 @@
 package com.polimi.dima.Uniquiz.uniquiz.Controller;
 
-import com.polimi.dima.Uniquiz.uniquiz.Model.LoginRequest;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Response;
-import com.polimi.dima.Uniquiz.uniquiz.Model.University;
-import com.polimi.dima.Uniquiz.uniquiz.Model.User;
+import com.polimi.dima.Uniquiz.uniquiz.Model.*;
 import com.polimi.dima.Uniquiz.uniquiz.Service.UniversityService;
 import com.polimi.dima.Uniquiz.uniquiz.Service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -32,9 +30,6 @@ public class UserController {
         if(uni != null){
             user.setUniversityId(uni.getId());
         }
-        else{
-            //TO DO: case for when a student of a non-present university is registering
-        }
         return service.registration(user);
     }
     @PostMapping("/login")
@@ -42,4 +37,9 @@ public class UserController {
         return service.login(loginRequest);
     }
 
+
+    @GetMapping("/{id}/subjects")
+    public List<Subject> getSubjectsByUser(@PathVariable String id){
+        return service.getSubjects(id);
+    }
 }

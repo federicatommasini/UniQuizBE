@@ -10,7 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-12T11:06:56+0200",
+    date = "2023-06-17T11:20:23+0200",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -103,75 +103,5 @@ public class UserMapperImpl implements UserMapper {
         }
 
         return userEntity;
-    }
-
-    @Override
-    public UserEntity updateEntity(UserEntity entity, User user) {
-        if ( user == null ) {
-            return entity;
-        }
-
-        if ( user.getId() != null ) {
-            entity.setId( user.getId() );
-        }
-        if ( user.getUsername() != null ) {
-            entity.setUsername( user.getUsername() );
-        }
-        if ( user.getEmail() != null ) {
-            entity.setEmail( user.getEmail() );
-        }
-        if ( user.getPassword() != null ) {
-            entity.setPassword( user.getPassword() );
-        }
-        if ( user.getFirstName() != null ) {
-            entity.setFirstName( user.getFirstName() );
-        }
-        if ( user.getLastName() != null ) {
-            entity.setLastName( user.getLastName() );
-        }
-        if ( user.getUniversityId() != null ) {
-            entity.setUniversityId( user.getUniversityId() );
-        }
-        if ( entity.getSubjectIds() != null ) {
-            List<String> list = user.getSubjectIds();
-            if ( list != null ) {
-                entity.getSubjectIds().clear();
-                entity.getSubjectIds().addAll( list );
-            }
-        }
-        else {
-            List<String> list = user.getSubjectIds();
-            if ( list != null ) {
-                entity.setSubjectIds( new ArrayList<String>( list ) );
-            }
-        }
-        if ( entity.getExams() != null ) {
-            List<Exam> list1 = user.getExams();
-            if ( list1 != null ) {
-                entity.getExams().clear();
-                entity.getExams().addAll( list1 );
-            }
-        }
-        else {
-            List<Exam> list1 = user.getExams();
-            if ( list1 != null ) {
-                entity.setExams( new ArrayList<Exam>( list1 ) );
-            }
-        }
-        if ( entity.getSchedules() != null ) {
-            List<Schedule> list2 = user.getSchedules();
-            if ( list2 != null ) {
-                entity.getSchedules().clear();
-                entity.getSchedules().addAll( list2 );
-            }
-        }
-        else {
-            List<Schedule> list2 = user.getSchedules();
-            if ( list2 != null ) {
-                entity.setSchedules( new ArrayList<Schedule>( list2 ) );
-            }
-        }
-
-        return entity;
     }
 }
