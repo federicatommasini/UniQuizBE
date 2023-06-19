@@ -7,6 +7,7 @@ import com.polimi.dima.Uniquiz.uniquiz.Service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class SubjectController {
     @GetMapping("/subjects/{id}")
     public Subject getSubjectById(@PathVariable String id){
         return service.getSubjectById(id);
+    }
+
+    @GetMapping("/subjectByName/{subjectName}")
+    public Subject getSubjectByName(@PathVariable String subjectName){
+        return service.getSubjectByName(subjectName);
     }
 
 

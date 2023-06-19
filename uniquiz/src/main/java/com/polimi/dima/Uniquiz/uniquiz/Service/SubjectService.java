@@ -31,5 +31,9 @@ public class SubjectService {
         return subject.map(SubjectMapper.INSTANCE::fromEntity).orElse(null);
     }
 
+    public Subject getSubjectByName(String name){
+        Optional<SubjectEntity> subject = repository.findByName(name);
+        return subject.map(SubjectMapper.INSTANCE::fromEntity).orElse(null);
+    }
 
 }
