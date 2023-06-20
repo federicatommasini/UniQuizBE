@@ -1,13 +1,10 @@
 package com.polimi.dima.Uniquiz.uniquiz.Controller;
 
 import com.polimi.dima.Uniquiz.uniquiz.Model.Subject;
-import com.polimi.dima.Uniquiz.uniquiz.Model.User;
 import com.polimi.dima.Uniquiz.uniquiz.Service.SubjectService;
-import com.polimi.dima.Uniquiz.uniquiz.Service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
