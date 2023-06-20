@@ -5,6 +5,8 @@ import com.polimi.dima.Uniquiz.uniquiz.Service.UniversityService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class UniversityController {
@@ -21,4 +23,8 @@ public class UniversityController {
         return service.registerUni(university);
     }
 
+    @GetMapping("/university/all")
+    public List<University> getAllUniversities(){
+        return service.getAllUniversities();
+    }
 }

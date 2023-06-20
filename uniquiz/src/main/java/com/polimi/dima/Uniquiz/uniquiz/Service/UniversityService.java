@@ -1,10 +1,16 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
+import com.polimi.dima.Uniquiz.uniquiz.Domain.UniversityEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.UniversityMapper;
+import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.University;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.UniversityRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -32,4 +38,8 @@ public class UniversityService {
         return UniversityMapper.INSTANCE.fromEntity(savedEntity);
     }
 
+    public List<University> getAllUniversities() {
+        List<UniversityEntity> universityEntities = repository.findAll();
+        return universityEntities.stream().map(UniversityMapper.INSTANCE::fromEntity).collect(Collectors.toList());
+    }
 }
