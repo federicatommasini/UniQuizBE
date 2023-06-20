@@ -58,7 +58,7 @@ public class UserService {
     public List<Subject> getSubjects(String userId){
         User user = getUserById(userId);
         if (user != null) {
-            List<Subject> subjects = new ArrayList<Subject>();
+            List<Subject> subjects = new ArrayList<>();
             for(String subjectId : user.getSubjectIds()){
                 subjects.add(subjectService.getSubjectById(subjectId));
             }
