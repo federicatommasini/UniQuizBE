@@ -20,18 +20,21 @@ public class UserController {
     public List<User> getUsers(){
         return service.getUsers();
     }
+
     @GetMapping("/{id}")
     public User getUserById(@PathVariable String id){
         return service.getUserById(id);
     }
+
     @PostMapping("/registration")
-    public User registration(@RequestBody User user){
-        University uni = uniService.getUniversityByName(user.getUniversityId());
+    public User registration(@RequestBody RegistrationRequest registrationRequest){
+        University uni = uniService.getUniversityByName(registrationRequest.getUniversityName());
         if(uni != null){
-            user.setUniversityId(uni.getId());
+            registrationRequest.setUniversityName(uni.getId());
         }
-        return service.registration(user);
+        return service.registration(registrationRequest);
     }
+
     @PostMapping("/login")
     public Response login(@RequestBody LoginRequest loginRequest){
         return service.login(loginRequest);
