@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface SubjectRepository extends MongoRepository<SubjectEntity, String> {
 
+    Optional<SubjectEntity> findByName(String name);
+
 }

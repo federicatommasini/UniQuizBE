@@ -67,4 +67,15 @@ public class UserService {
         }
         return null;
     }
+
+    public User addSubject(Subject subject, String userId){
+        User user = getUserById(userId);
+        List<String> userSubject = user.getSubjectIds();
+        if(!userSubject.contains(subject.getId())) {
+            userSubject.add(subject.getId());
+            user.setSubjectIds(userSubject);
+            repository.save(UserMapper.INSTANCE.toEntity(user));
+        }
+        return user;
+    }
 }

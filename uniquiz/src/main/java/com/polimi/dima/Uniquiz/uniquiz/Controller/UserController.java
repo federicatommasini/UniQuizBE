@@ -44,4 +44,9 @@ public class UserController {
     public List<Subject> getSubjectsByUser(@PathVariable String id){
         return service.getSubjects(id);
     }
+
+    @PostMapping("/{id}/addSubject")
+    public User addSubject(@RequestBody Subject subject, @PathVariable String id){
+        return service.addSubject(subject,id);
+    }
 }
