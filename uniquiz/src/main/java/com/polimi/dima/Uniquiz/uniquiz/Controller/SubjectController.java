@@ -21,14 +21,9 @@ public class SubjectController {
     }
 
 
-    @GetMapping("/subjects/{id}")
-    public Subject getSubjectById(@PathVariable String id){
-        return service.getSubjectById(id);
-    }
-
-    @GetMapping("/subjectByName/{subjectName}")
-    public Subject getSubjectByName(@PathVariable String subjectName){
-        return service.getSubjectByName(subjectName);
+    @GetMapping("/subjectById/{subjectId}")
+    public Subject getSubjectById(@PathVariable String subjectId){
+        return service.getSubjectById(subjectId);
     }
 
 
