@@ -25,7 +25,7 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-        user.setPassword(request.getPasword());
+        user.setPassword(request.getPassword());
         user.setUsername(request.getUsername());
         user.setUniversityId(request.getUniversityName());
         user.setExams(Collections.emptyList());
@@ -77,5 +77,12 @@ public class UserService {
             repository.save(UserMapper.INSTANCE.toEntity(user));
         }
         return user;
+    }
+
+    public User updateProfile(String newPassword, String id) {
+        User oldUser = getUserById(id);
+        oldUser.setPassword(newPassword);
+        repository.save(UserMapper.INSTANCE.toEntity(oldUser));
+        return oldUser;
     }
 }

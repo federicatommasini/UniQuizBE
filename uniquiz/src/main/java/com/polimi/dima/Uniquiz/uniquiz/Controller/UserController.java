@@ -49,4 +49,9 @@ public class UserController {
     public User addSubject(@RequestBody Subject subject, @PathVariable String id){
         return service.addSubject(subject,id);
     }
+
+    @PutMapping("/updateProfile/{id}")
+    public User updateProfile(@RequestBody String newPassword, @PathVariable String id){
+        return service.updateProfile(newPassword, id);
+    }
 }
