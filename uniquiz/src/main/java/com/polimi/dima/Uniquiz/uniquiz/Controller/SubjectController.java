@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,5 +27,8 @@ public class SubjectController {
         return service.getSubjectById(subjectId);
     }
 
-
+    @GetMapping("/documents/{subjectId}")
+    public List<String> getDocumentsLinks(@PathVariable String subjectId){
+        return service.getDocumentsLinks(subjectId);
+    }
 }

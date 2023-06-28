@@ -11,6 +11,7 @@ import com.polimi.dima.Uniquiz.uniquiz.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,6 +35,16 @@ public class SubjectService {
     public Subject getSubjectByName(String name){
         Optional<SubjectEntity> subject = repository.findByName(name);
         return subject.map(SubjectMapper.INSTANCE::fromEntity).orElse(null);
+    }
+
+    public List<String> getDocumentsLinks(String subjectId){
+        Subject subject = getSubjectById(subjectId);
+        String base_url = subject.getBase_url();
+        List<String> urls = new ArrayList<>();
+        for(String s : subject.getPdf_links()){
+            urls.add(base_url + s);
+        }
+        return urls;
     }
 
 }
