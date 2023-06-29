@@ -52,6 +52,11 @@ public class UserController {
 
     @PutMapping("/updateProfile/{id}")
     public User updateProfile(@RequestBody String newPassword, @PathVariable String id){
-        return service.updateProfile(newPassword, id);
+        String cleanPassword = newPassword;
+        if(newPassword.startsWith("\"") && newPassword.endsWith("\"")){
+            cleanPassword = newPassword.substring(1, newPassword.length()-1);
+        }
+
+        return service.updateProfile(cleanPassword, id);
     }
 }
