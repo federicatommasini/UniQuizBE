@@ -39,6 +39,10 @@ public class UserController {
         return service.login(loginRequest);
     }
 
+    @PutMapping("/{id}/pic")
+    public User uploadProfilePic(@PathVariable String id, @RequestBody String picUrl){
+        return service.uploadPic(id, picUrl);
+    }
 
     @GetMapping("/{id}/subjects")
     public List<Subject> getSubjectsByUser(@PathVariable String id){

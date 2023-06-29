@@ -31,6 +31,7 @@ public class UserService {
         user.setExams(Collections.emptyList());
         user.setSchedules(Collections.emptyList());
         user.setSubjectIds(Collections.emptyList());
+        user.setProfilePicUrl(new String(""));
 
         var entity = UserMapper.INSTANCE.toEntity(user);
         var savedEntity = repository.save(entity);
@@ -80,9 +81,24 @@ public class UserService {
     }
 
     public User updateProfile(String newPassword, String id) {
-        User oldUser = getUserById(id);
-        oldUser.setPassword(newPassword);
-        repository.save(UserMapper.INSTANCE.toEntity(oldUser));
-        return oldUser;
+        User user = getUserById(id);
+
+        //setprofilepicurl
+
+        user.setPassword(newPassword);
+        repository.save(UserMapper.INSTANCE.toEntity(user));
+        return user;
+    }
+
+    public User uploadPic(String id, String picUrl) {
+        User user = getUserById(id);
+        user.setProfilePicUrl(picUrl);
+        //System.out.println("user " + user.toString());
+        var entity = UserMapper.INSTANCE.toEntity(user);
+        //System.out.println("entity " + entity);
+        var savedEntity = repository.save(entity);
+        //System.out.println("saved ent " + savedEntity.toString());
+        //repository.save(UserMapper.INSTANCE.toEntity(user));
+        return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
 }
