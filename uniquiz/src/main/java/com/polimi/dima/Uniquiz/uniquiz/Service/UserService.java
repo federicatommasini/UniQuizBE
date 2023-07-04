@@ -80,25 +80,18 @@ public class UserService {
         return user;
     }
 
-    public User updateProfile(String newPassword, String id) {
-        User user = getUserById(id);
-
-        //setprofilepicurl
-
-        user.setPassword(newPassword);
-        repository.save(UserMapper.INSTANCE.toEntity(user));
-        return user;
+    public User updateProfile(User user, String id) {
+        var savedEntity = repository.save(UserMapper.INSTANCE.toEntity(user));
+        return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
 
-    public User uploadPic(String id, String picUrl) {
-        User user = getUserById(id);
-        user.setProfilePicUrl(picUrl);
-        //System.out.println("user " + user.toString());
+    public User uploadPic(User user) {
+        /*User user = getUserById(id);
+        user.setProfilePicUrl(iconUrl);
         var entity = UserMapper.INSTANCE.toEntity(user);
-        //System.out.println("entity " + entity);
         var savedEntity = repository.save(entity);
-        //System.out.println("saved ent " + savedEntity.toString());
-        //repository.save(UserMapper.INSTANCE.toEntity(user));
+        return UserMapper.INSTANCE.fromEntity(savedEntity);*/
+        var savedEntity = repository.save(UserMapper.INSTANCE.toEntity(user));
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
 }

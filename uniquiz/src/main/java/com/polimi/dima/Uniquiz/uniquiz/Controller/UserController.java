@@ -40,8 +40,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}/pic")
-    public User uploadProfilePic(@PathVariable String id, @RequestBody String picUrl){
-        return service.uploadPic(id, picUrl);
+    public User uploadProfilePic(@PathVariable String id, @RequestBody User user){
+        System.out.println("mi è arrivata la richiesta con " + user.toString());
+        return service.uploadPic(user);
     }
 
     @GetMapping("/{id}/subjects")
@@ -51,16 +52,11 @@ public class UserController {
 
     @PostMapping("/{id}/addSubject")
     public User addSubject(@RequestBody Subject subject, @PathVariable String id){
-        return service.addSubject(subject,id);
+        return service.addSubject(subject, id);
     }
 
     @PutMapping("/updateProfile/{id}")
-    public User updateProfile(@RequestBody String newPassword, @PathVariable String id){
-        String cleanPassword = newPassword;
-        if(newPassword.startsWith("\"") && newPassword.endsWith("\"")){
-            cleanPassword = newPassword.substring(1, newPassword.length()-1);
-        }
-
-        return service.updateProfile(cleanPassword, id);
+    public User updateProfile(@RequestBody User user, @PathVariable String id){
+        return service.updateProfile(user, id);
     }
 }
