@@ -20,4 +20,6 @@ public class Subject {
     private String name;
     private List<String> quizIds;
     private Map<String, Integer> ranking;
+    private String base_url;
+    private List<String> pdf_links;
 }

@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,5 +27,10 @@ public class QuizService {
         List<Quiz> quizzes = entities.stream().filter(q -> subject.getQuizIds().contains(q.getId())).map(q-> QuizMapper.INSTANCE.fromEntity(q)).collect(Collectors.toList());
 
         return quizzes;
+    }
+
+    public Quiz getQuizById(String id){
+        Optional<QuizEntity> quiz = repository.findById(id);
+        return quiz.map(QuizMapper.INSTANCE::fromEntity).orElse(null);
     }
 }

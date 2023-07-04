@@ -20,4 +20,9 @@ public class QuizController {
     public List<Quiz> getQuizzesBySubject(@PathVariable String subjectId){
         return service.getQuizzesBySubject(subjectId);
     }
+
+    @GetMapping("/quizById/{quizId}")
+    public Quiz getQuizById(@PathVariable String quizId){
+        return service.getQuizById(quizId);
+    }
 }
