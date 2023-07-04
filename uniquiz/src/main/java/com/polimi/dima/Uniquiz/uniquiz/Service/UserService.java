@@ -80,7 +80,7 @@ public class UserService {
         return user;
     }
 
-    public User updateProfile(User user, String id) {
+    public User updateProfile(User user) {
         var savedEntity = repository.save(UserMapper.INSTANCE.toEntity(user));
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }

@@ -41,7 +41,6 @@ public class UserController {
 
     @PutMapping("/{id}/pic")
     public User uploadProfilePic(@PathVariable String id, @RequestBody User user){
-        System.out.println("mi è arrivata la richiesta con " + user.toString());
         return service.uploadPic(user);
     }
 
@@ -57,6 +56,6 @@ public class UserController {
 
     @PutMapping("/updateProfile/{id}")
     public User updateProfile(@RequestBody User user, @PathVariable String id){
-        return service.updateProfile(user, id);
+        return service.updateProfile(user);
     }
 }
