@@ -3,9 +3,7 @@ package com.polimi.dima.Uniquiz.uniquiz.Controller;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Quiz;
 import com.polimi.dima.Uniquiz.uniquiz.Service.QuizService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class QuizController {
     @GetMapping("/quizById/{quizId}")
     public Quiz getQuizById(@PathVariable String quizId){
         return service.getQuizById(quizId);
+    }
+
+    @PutMapping("/addScore/{quizId}/{userId}/{score}")
+    public void addScore(@PathVariable String quizId, @PathVariable String userId, @PathVariable Integer score){
+         service.addScore( quizId, userId, score);
     }
 }

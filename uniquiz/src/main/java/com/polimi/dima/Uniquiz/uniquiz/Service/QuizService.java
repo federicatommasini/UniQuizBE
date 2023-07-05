@@ -11,7 +11,9 @@ import com.polimi.dima.Uniquiz.uniquiz.Repository.SubjectRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,7 +27,6 @@ public class QuizService {
         List<QuizEntity> entities = repository.findAll();
         SubjectEntity subject = subjectRepo.findById(subjectId).get();
         List<Quiz> quizzes = entities.stream().filter(q -> subject.getQuizIds().contains(q.getId())).map(q-> QuizMapper.INSTANCE.fromEntity(q)).collect(Collectors.toList());
-
         return quizzes;
     }
 
@@ -33,4 +34,17 @@ public class QuizService {
         Optional<QuizEntity> quiz = repository.findById(id);
         return quiz.map(QuizMapper.INSTANCE::fromEntity).orElse(null);
     }
+
+    public Quiz addScore(String quizId, String userId, Integer score){
+        Quiz quiz = getQuizById(quizId);
+        Map<String, Integer> scoreMap ;
+        if(null!=quiz.getScore())
+            scoreMap = quiz.getScore();
+        else scoreMap = new HashMap<>();
+        scoreMap.put(userId,score);
+        quiz.setScore(scoreMap);
+        repository.save(QuizMapper.INSTANCE.toEntity(quiz));
+        return quiz;
+    }
+
 }

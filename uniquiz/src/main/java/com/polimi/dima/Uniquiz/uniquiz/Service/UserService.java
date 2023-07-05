@@ -1,6 +1,7 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
 import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
+import com.polimi.dima.Uniquiz.uniquiz.Mappers.SubjectMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.*;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,6 +77,11 @@ public class UserService {
             userSubject.add(subject.getId());
             user.setSubjectIds(userSubject);
             repository.save(UserMapper.INSTANCE.toEntity(user));
+            Subject sub = subjectService.getSubjectById(subject.getId());
+            Map<String,Integer> mapRanking = sub.getRanking();
+            mapRanking.put(userId,0);
+            sub.setRanking(mapRanking);
+            subjectService.save(SubjectMapper.INSTANCE.toEntity(sub));
         }
         return user;
     }
