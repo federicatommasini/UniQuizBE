@@ -39,6 +39,10 @@ public class UserController {
         return service.login(loginRequest);
     }
 
+    @PutMapping("/{id}/pic")
+    public User uploadProfilePic(@PathVariable String id, @RequestBody User user){
+        return service.uploadPic(user);
+    }
 
     @GetMapping("/{id}/subjects")
     public List<Subject> getSubjectsByUser(@PathVariable String id){
@@ -47,11 +51,11 @@ public class UserController {
 
     @PostMapping("/{id}/addSubject")
     public User addSubject(@RequestBody Subject subject, @PathVariable String id){
-        return service.addSubject(subject,id);
+        return service.addSubject(subject, id);
     }
 
     @PutMapping("/updateProfile/{id}")
-    public User updateProfile(@RequestBody String newPassword, @PathVariable String id){
-        return service.updateProfile(newPassword, id);
+    public User updateProfile(@RequestBody User user, @PathVariable String id){
+        return service.updateProfile(user);
     }
 }

@@ -26,4 +26,5 @@ public class UserEntity {
     private List<String> subjectIds;
     private List<Exam> exams;
     private List<Schedule> schedules;
+    private String profilePicUrl;
 }
