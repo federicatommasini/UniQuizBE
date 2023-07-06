@@ -1,14 +1,10 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
 import com.polimi.dima.Uniquiz.uniquiz.Domain.SubjectEntity;
-import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.SubjectMapper;
-import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Quiz;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Subject;
-import com.polimi.dima.Uniquiz.uniquiz.Model.User;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.SubjectRepository;
-import com.polimi.dima.Uniquiz.uniquiz.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -59,12 +55,13 @@ public class SubjectService {
         int totalPoints = 0;
         int quizDone = 0;
         int totalQuiz = quizzes.size();
-        for(Quiz q : quizzes)
-            if(null!=q.getScore() && q.getScore().containsKey(userId)){
+        for(Quiz q : quizzes) {
+            totalPoints += q.getQuestions().size();
+            if (null != q.getScore() && q.getScore().containsKey(userId)) {
                 score += q.getScore().get(userId);
-                totalPoints += q.getQuestions().size();
                 quizDone += 1;
             }
+        }
         int assignedScore = (score/totalPoints) + (quizDone/totalQuiz);
         ranking.put(userId,assignedScore);
         subj.setRanking(ranking);
