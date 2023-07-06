@@ -93,12 +93,20 @@ public class UserService {
     }
 
     public User uploadPic(User user) {
-        /*User user = getUserById(id);
-        user.setProfilePicUrl(iconUrl);
-        var entity = UserMapper.INSTANCE.toEntity(user);
-        var savedEntity = repository.save(entity);
-        return UserMapper.INSTANCE.fromEntity(savedEntity);*/
         var savedEntity = repository.save(UserMapper.INSTANCE.toEntity(user));
         return UserMapper.INSTANCE.fromEntity(savedEntity);
+    }
+
+    public User addExam(Exam savedExam, String userId) {
+        User user = getUserById(userId);
+        if(user.getExams().isEmpty()){
+            List<Exam> exams = new ArrayList<Exam>();
+            exams.add(savedExam);
+            user.setExams(exams);
+        }
+        else{
+            user.getExams().add(savedExam);
+        }
+        return updateProfile(user);
     }
 }
