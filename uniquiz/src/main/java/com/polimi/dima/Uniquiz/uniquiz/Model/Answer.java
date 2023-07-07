@@ -11,8 +11,6 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Answer {
-    @Id
-    private String id;
     private String text;
     private boolean isCorrect;
 }
