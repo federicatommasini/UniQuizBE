@@ -17,5 +17,5 @@ public class ExamEntity {
     @Id
     private String id;
     private String subjectId;
-    private LocalDateTime date;
+    private Date date;
 }

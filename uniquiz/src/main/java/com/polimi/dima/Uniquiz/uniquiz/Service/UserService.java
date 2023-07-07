@@ -108,6 +108,7 @@ public class UserService {
             examsAlreadyPresent.add(savedExam);
             user.setExams(examsAlreadyPresent);
         }
+        System.out.println(user.toString());
         return updateProfile(user);
     }
 }
