@@ -43,22 +43,28 @@ public class ExamService {
             e.printStackTrace();
         }
         exam.setDate(date);
-        System.out.println(exam.getDate().toString());
-        Boolean toSave = true;
-        Exam savedExam = null;
+        Boolean examToSave = true;
+        //check if the exam has already been saved for that user
+        for(Exam userExam : userService.getUserById(userId).getExams()){
+            if(examRequest.getSubjectId().compareTo(userExam.getSubjectId()) == 0 && date.compareTo(userExam.getDate()) == 0){
+                //examToAdd = false;
+                return userService.getUserById(userId);
+            }
+        }
         //check if the exam already exists
+        Exam savedExam = null;
         for(Exam e : getExams()){
             if(e.getSubjectId().compareTo(exam.getSubjectId()) == 0 && e.getDate().compareTo(exam.getDate()) == 0){
-                toSave = false;
+                examToSave = false;
                 savedExam = e;
             }
         }
         //if it does not exist, save it and then add it to the user
-        if(toSave){
+        if(examToSave){
             ExamEntity entity = ExamMapper.INSTANCE.toEntity(exam);
             ExamEntity savedEntity = repository.save(entity);
             savedExam = ExamMapper.INSTANCE.fromEntity(savedEntity); 
-        }        
+        }
         return userService.addExam(savedExam, userId);
     }
 }
