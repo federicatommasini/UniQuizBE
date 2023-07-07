@@ -19,5 +19,6 @@ public class Exam {
     @Id
     private String id;
     private String subjectId;
+    @JsonSerialize
     private Date date;
 }
