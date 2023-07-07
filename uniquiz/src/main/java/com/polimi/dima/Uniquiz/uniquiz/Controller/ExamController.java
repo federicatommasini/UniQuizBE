@@ -18,7 +18,6 @@ public class ExamController {
 
     @PostMapping("/addExam/{userId}")
     public User addExam(@PathVariable String userId, @RequestBody ExamRequest exam){
-        System.out.println("DICAN");
         return service.addExam(userId, exam);
     }
 }

@@ -23,7 +23,6 @@ public class ExamService {
 
 
     public User addExam(String userId, ExamRequest examRequest) {
-        System.out.println("received examx");
         Exam exam = new Exam();
         exam.setSubjectId(examRequest.getSubjectId());
         String pattern = "yyyy-MM-dd";
@@ -31,7 +30,6 @@ public class ExamService {
         Date date = null;
         try {
             date = formatter.parse(examRequest.getDate());
-            System.out.println(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
