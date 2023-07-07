@@ -65,7 +65,6 @@ public class UserService {
             for(String subjectId : user.getSubjectIds()){
                 subjects.add(subjectService.getSubjectById(subjectId));
             }
-
             return subjects;
         }
         return null;
@@ -105,7 +104,9 @@ public class UserService {
             user.setExams(exams);
         }
         else{
-            user.getExams().add(savedExam);
+            List<Exam> examsAlreadyPresent = user.getExams();
+            examsAlreadyPresent.add(savedExam);
+            user.setExams(examsAlreadyPresent);
         }
         return updateProfile(user);
     }

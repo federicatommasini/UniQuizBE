@@ -1,9 +1,7 @@
 package com.polimi.dima.Uniquiz.uniquiz.Mappers;
 
 import com.polimi.dima.Uniquiz.uniquiz.Domain.ExamEntity;
-import com.polimi.dima.Uniquiz.uniquiz.Domain.QuizEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Exam;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Quiz;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;

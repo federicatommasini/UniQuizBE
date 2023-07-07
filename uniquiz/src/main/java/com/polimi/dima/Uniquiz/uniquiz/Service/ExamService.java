@@ -1,7 +1,6 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.ExamMapper;
-import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Exam;
 import com.polimi.dima.Uniquiz.uniquiz.Model.ExamRequest;
 import com.polimi.dima.Uniquiz.uniquiz.Model.User;
@@ -18,10 +17,11 @@ public class ExamService {
     private UserService userService;
 
 
-    public User addExam(String userId, ExamRequest fakeExam) {
+    public User addExam(String userId, ExamRequest examRequest) {
+        System.out.println("received examx");
         val exam = new Exam();
-        exam.setSubjectId(fakeExam.getSubjectId());
-        exam.setDate(fakeExam.getDate());
+        exam.setSubjectId(examRequest.getSubjectId());
+        exam.setDate(examRequest.getDate());
         var entity = ExamMapper.INSTANCE.toEntity(exam);
         var savedEntity = repository.save(entity);
         val savedExam = ExamMapper.INSTANCE.fromEntity(savedEntity);
