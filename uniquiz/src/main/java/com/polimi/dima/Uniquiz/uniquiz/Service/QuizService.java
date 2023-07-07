@@ -4,17 +4,13 @@ import com.polimi.dima.Uniquiz.uniquiz.Domain.QuizEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Domain.SubjectEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.QuizMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.SubjectMapper;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Quiz;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Subject;
+import com.polimi.dima.Uniquiz.uniquiz.Model.*;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.QuizRepository;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.SubjectRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +18,7 @@ import java.util.stream.Collectors;
 public class QuizService {
     private QuizRepository repository;
     private SubjectRepository subjectRepo;
+
 
     public List<Quiz> getQuizzesBySubject(String subjectId){
         List<QuizEntity> entities = repository.findAll();
@@ -45,6 +42,36 @@ public class QuizService {
         quiz.setScore(scoreMap);
         repository.save(QuizMapper.INSTANCE.toEntity(quiz));
         return quiz;
+    }
+
+    public Subject addQuestion(NewQuestionRequest request){
+        List<Question> questions;
+        List<String> quizIds;
+        Quiz quiz;
+        SubjectEntity subject = subjectRepo.findById(request.getSubjectId()).get();
+        if(null!=request.getQuizId()){
+            quiz = getQuizById(request.getQuizId());
+            questions = (null!=quiz.getQuestions()) ? quiz.getQuestions() :  new ArrayList<>();
+            questions.add(request.getQuestion());
+            quiz.setQuestions(questions);
+            repository.save(QuizMapper.INSTANCE.toEntity(quiz));
+        }
+        else{
+            questions = new ArrayList<>();
+            questions.add(request.getQuestion());
+            quiz = new Quiz();
+            quiz.setName(request.getQuizName());
+            quiz.setQuestions(questions);
+            quiz.setScore(new HashMap<String,Integer>());
+            if(null!=subject.getQuizIds())
+                quizIds = subject.getQuizIds();
+            else quizIds = new ArrayList<>();
+            QuizEntity entity = repository.save(QuizMapper.INSTANCE.toEntity(quiz));
+            quizIds.add(entity.getId());
+            subject.setQuizIds(quizIds);
+            subjectRepo.save(subject);
+        }
+        return SubjectMapper.INSTANCE.fromEntity(subject);
     }
 
 }
