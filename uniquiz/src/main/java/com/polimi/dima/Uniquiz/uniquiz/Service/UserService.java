@@ -96,19 +96,24 @@ public class UserService {
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
 
-    public User addExam(Exam savedExam, String userId) {
+    public User addExam(UserExam savedExam, String userId) {
         User user = getUserById(userId);
         if(user.getExams().isEmpty()){
-            List<Exam> exams = new ArrayList<Exam>();
+            /*List<Exam> exams = new ArrayList<Exam>();
+            exams.add(savedExam);
+            user.setExams(exams);*/
+            List<UserExam> exams = new ArrayList<UserExam>();
             exams.add(savedExam);
             user.setExams(exams);
         }
         else{
-            List<Exam> examsAlreadyPresent = user.getExams();
+            /*List<Exam> examsAlreadyPresent = user.getExams();
+            examsAlreadyPresent.add(savedExam);
+            user.setExams(examsAlreadyPresent);*/
+            List<UserExam> examsAlreadyPresent = user.getExams();
             examsAlreadyPresent.add(savedExam);
             user.setExams(examsAlreadyPresent);
         }
-        System.out.println(user.toString());
         return updateProfile(user);
     }
 }

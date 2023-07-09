@@ -22,7 +22,8 @@ public class User {
     private String lastName;
     private String universityId;
     private List<String> subjectIds;
-    private List<Exam> exams;
+    //private List<Exam> exams;
+    private List<UserExam> exams;
     private List<Schedule> schedules;
     private String profilePicUrl;
 }

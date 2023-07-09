@@ -7,6 +7,7 @@ import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Exam;
 import com.polimi.dima.Uniquiz.uniquiz.Model.ExamRequest;
 import com.polimi.dima.Uniquiz.uniquiz.Model.User;
+import com.polimi.dima.Uniquiz.uniquiz.Model.UserExam;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.ExamRepository;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -33,6 +34,7 @@ public class ExamService {
 
     public User addExam(String userId, ExamRequest examRequest) {
         Exam exam = new Exam();
+        UserExam newUserExam = new UserExam();
         exam.setSubjectId(examRequest.getSubjectId());
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
@@ -43,16 +45,17 @@ public class ExamService {
             e.printStackTrace();
         }
         exam.setDate(date);
+        newUserExam.setNotes(examRequest.getNotes());
         Boolean examToSave = true;
         //check if the exam has already been saved for that user
-        for(Exam userExam : userService.getUserById(userId).getExams()){
-            if(examRequest.getSubjectId().compareTo(userExam.getSubjectId()) == 0 && date.compareTo(userExam.getDate()) == 0){
-                //examToAdd = false;
+        for(UserExam userExamAlreadyPresent : userService.getUserById(userId).getExams()){
+            if(examRequest.getSubjectId().compareTo(userExamAlreadyPresent.getExam().getSubjectId()) == 0
+                    && date.compareTo(userExamAlreadyPresent.getExam().getDate()) == 0){
                 return userService.getUserById(userId);
             }
         }
         //check if the exam already exists
-        Exam savedExam = null;
+        Exam savedExam = null;  
         for(Exam e : getExams()){
             if(e.getSubjectId().compareTo(exam.getSubjectId()) == 0 && e.getDate().compareTo(exam.getDate()) == 0){
                 examToSave = false;
@@ -65,6 +68,7 @@ public class ExamService {
             ExamEntity savedEntity = repository.save(entity);
             savedExam = ExamMapper.INSTANCE.fromEntity(savedEntity); 
         }
-        return userService.addExam(savedExam, userId);
+        newUserExam.setExam(savedExam);
+        return userService.addExam(newUserExam, userId);
     }
 }
