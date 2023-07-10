@@ -20,9 +20,9 @@ public class UserController {
         return service.getUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable String id){
-        return service.getUserById(id);
+    @GetMapping("/users/{userId}")
+    public User getUserById(@PathVariable String userId){
+        return service.getUserById(userId);
     }
 
     @PostMapping("/registration")

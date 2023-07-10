@@ -44,26 +44,32 @@ public class SubjectService {
         return urls;
     }
     public void updateRanking(String subjectId, String userId){
+        System.out.println("subjectId "+subjectId);
+        System.out.println("userId "+userId);
         Subject subj = getSubjectById(subjectId);
         Map<String, Integer> ranking;
         if(null!= subj.getRanking())
             ranking = subj.getRanking();
         else ranking = new HashMap<>();
         List<String> quizIds = subj.getQuizIds();
+        System.out.println("quizIds "+quizIds);
         List<Quiz> quizzes = quizIds.stream().map(id -> quizService.getQuizById(id)).collect(Collectors.toList());
-        int score = 0;
-        int totalPoints = 0;
-        int quizDone = 0;
+        System.out.println("quizzes "+quizzes);
+        float score = 0;
+        float totalPoints = 0;
+        float quizDone = 0;
         int totalQuiz = quizzes.size();
         for(Quiz q : quizzes) {
-            totalPoints += q.getQuestions().size();
-            if (null != q.getScore() && q.getScore().containsKey(userId)) {
-                score += q.getScore().get(userId);
-                quizDone += 1;
+            if (null != q.getQuestions()){
+                totalPoints += q.getQuestions().size();
+                if (null != q.getScore() && q.getScore().containsKey(userId)) {
+                    score += q.getScore().get(userId);
+                    quizDone += 1;
+                }
             }
         }
-        int assignedScore = (score/totalPoints) + (quizDone/totalQuiz);
-        ranking.put(userId,assignedScore);
+        float assignedScore = ((score/totalPoints) + (quizDone/totalQuiz))*5;
+        ranking.put(userId,(int)assignedScore);
         subj.setRanking(ranking);
         save(SubjectMapper.INSTANCE.toEntity(subj));
     }
