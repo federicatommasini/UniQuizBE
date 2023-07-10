@@ -23,7 +23,7 @@ public class UserService {
     private SubjectService subjectService;
 
     public User registration(RegistrationRequest request){
-        val user = new User();
+        User user = new User();
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());

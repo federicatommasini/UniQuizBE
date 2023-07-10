@@ -2,11 +2,14 @@ package com.polimi.dima.Uniquiz.uniquiz.Service;
 
 import com.polimi.dima.Uniquiz.uniquiz.Domain.QuizEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Domain.SubjectEntity;
+import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.QuizMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.SubjectMapper;
+import com.polimi.dima.Uniquiz.uniquiz.Mappers.UserMapper;
 import com.polimi.dima.Uniquiz.uniquiz.Model.*;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.QuizRepository;
 import com.polimi.dima.Uniquiz.uniquiz.Repository.SubjectRepository;
+import com.polimi.dima.Uniquiz.uniquiz.Repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ public class QuizService {
 
     private QuizRepository repository;
     private SubjectRepository subjectRepo;
-    private UserService userService;
+    private UserRepository userRepo;
 
 
     public List<Quiz> getQuizzesBySubject(String subjectId){
@@ -51,8 +54,10 @@ public class QuizService {
         List<String> quizIds;
         Quiz quiz;
         SubjectEntity subject = subjectRepo.findById(request.getSubjectId()).get();
-        User user = userService.getUserById(request.getUserId());
+        UserEntity userEntity = userRepo.findById(request.getUserId()).orElse(null);
+        User user = UserMapper.INSTANCE.fromEntity(userEntity);
         user.setQuestionsAdded(user.getQuestionsAdded()+1);
+        userRepo.save(UserMapper.INSTANCE.toEntity(user));
         if(null!=request.getQuizId()){
             quiz = getQuizById(request.getQuizId());
             questions = (null!=quiz.getQuestions()) ? quiz.getQuestions() :  new ArrayList<>();
