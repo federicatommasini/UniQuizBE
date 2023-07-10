@@ -15,4 +15,5 @@ import java.util.List;
 public class Question {
     private String content;
     private List<Answer> answers;
+    private List<String> reports;
 }
