@@ -1,6 +1,7 @@
 package com.polimi.dima.Uniquiz.uniquiz.Controller;
 
 import com.polimi.dima.Uniquiz.uniquiz.Model.NewQuestionRequest;
+import com.polimi.dima.Uniquiz.uniquiz.Model.Question;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Quiz;
 import com.polimi.dima.Uniquiz.uniquiz.Model.Subject;
 import com.polimi.dima.Uniquiz.uniquiz.Service.QuizService;
@@ -34,5 +35,10 @@ public class QuizController {
     @PostMapping("/addQuestion")
     public Subject addQuestion(@RequestBody NewQuestionRequest request){
         return service.addQuestion(request);
+    }
+
+    @PostMapping("/addReport/{quizId}/{index}")
+    public Quiz addReport(@PathVariable String quizId, @PathVariable int index, @RequestBody String report){
+        return service.addReport(quizId,index,report);
     }
 }

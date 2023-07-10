@@ -83,4 +83,18 @@ public class QuizService {
         return SubjectMapper.INSTANCE.fromEntity(subject);
     }
 
+    public Quiz addReport(String quizId, int index,String report){
+        Quiz quiz = getQuizById(quizId);
+        Question question = quiz.getQuestions().get(index);
+        List<String> reports ;
+        if(null!=question.getReports()){
+            reports=question.getReports();
+        }else reports = new ArrayList<>();
+        reports.add(report);
+        question.setReports(reports);
+        quiz.getQuestions().set(index,question);
+        repository.save(QuizMapper.INSTANCE.toEntity(quiz));
+        return quiz;
+    }
+
 }
