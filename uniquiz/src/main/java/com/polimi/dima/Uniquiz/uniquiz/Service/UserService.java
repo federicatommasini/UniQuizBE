@@ -34,6 +34,8 @@ public class UserService {
         user.setSchedules(Collections.emptyList());
         user.setSubjectIds(Collections.emptyList());
         user.setProfilePicUrl(new String(""));
+        user.setQuestionsAdded(0);
+        user.setQuestionsReported(0);
 
         var entity = UserMapper.INSTANCE.toEntity(user);
         var savedEntity = repository.save(entity);
@@ -99,17 +101,11 @@ public class UserService {
     public User addExam(UserExam savedExam, String userId) {
         User user = getUserById(userId);
         if(user.getExams().isEmpty()){
-            /*List<Exam> exams = new ArrayList<Exam>();
-            exams.add(savedExam);
-            user.setExams(exams);*/
             List<UserExam> exams = new ArrayList<UserExam>();
             exams.add(savedExam);
             user.setExams(exams);
         }
         else{
-            /*List<Exam> examsAlreadyPresent = user.getExams();
-            examsAlreadyPresent.add(savedExam);
-            user.setExams(examsAlreadyPresent);*/
             List<UserExam> examsAlreadyPresent = user.getExams();
             examsAlreadyPresent.add(savedExam);
             user.setExams(examsAlreadyPresent);

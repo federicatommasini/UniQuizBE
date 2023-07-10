@@ -16,8 +16,10 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class QuizService {
+
     private QuizRepository repository;
     private SubjectRepository subjectRepo;
+    private UserService userService;
 
 
     public List<Quiz> getQuizzesBySubject(String subjectId){
@@ -49,6 +51,8 @@ public class QuizService {
         List<String> quizIds;
         Quiz quiz;
         SubjectEntity subject = subjectRepo.findById(request.getSubjectId()).get();
+        User user = userService.getUserById(request.getUserId());
+        user.setQuestionsAdded(user.getQuestionsAdded()+1);
         if(null!=request.getQuizId()){
             quiz = getQuizById(request.getQuizId());
             questions = (null!=quiz.getQuestions()) ? quiz.getQuestions() :  new ArrayList<>();

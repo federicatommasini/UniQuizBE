@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewQuestionRequest {
+    private String userId;
     private String subjectId;
     private String quizId;
     private String quizName;
