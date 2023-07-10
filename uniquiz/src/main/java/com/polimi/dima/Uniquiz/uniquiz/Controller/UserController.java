@@ -58,4 +58,14 @@ public class UserController {
     public User updateProfile(@RequestBody User user, @PathVariable String id){
         return service.updateProfile(user);
     }
+
+    @GetMapping("/completedSubjects/{userId}")
+    public int completedSubjectsUser(@PathVariable String userId){
+        return service.completedSubjectsUser(userId);
+    }
+
+    @GetMapping("/{userId}/points")
+    public int getPoints(@PathVariable String userId){
+        return service.getPoints(userId);
+    }
 }

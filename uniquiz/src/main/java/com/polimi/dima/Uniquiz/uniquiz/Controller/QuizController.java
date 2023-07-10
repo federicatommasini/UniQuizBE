@@ -35,4 +35,9 @@ public class QuizController {
     public Subject addQuestion(@RequestBody NewQuestionRequest request){
         return service.addQuestion(request);
     }
+
+    @GetMapping("/completedQuizzes/{userId}")
+    public List<Quiz> getCompletedQuizzesByUser(@PathVariable String userId){
+        return service.getCompletedQuizzesByUser(userId);
+    }
 }
