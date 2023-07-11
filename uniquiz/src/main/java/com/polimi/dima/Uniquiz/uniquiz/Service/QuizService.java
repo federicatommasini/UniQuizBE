@@ -33,8 +33,8 @@ public class QuizService {
     }
 
     public Quiz getQuizById(String id){
-        Optional<QuizEntity> quiz = repository.findById(id);
-        return quiz.map(QuizMapper.INSTANCE::fromEntity).orElse(null);
+        Optional<QuizEntity> entityQuiz = repository.findById(id);
+        return QuizMapper.INSTANCE.fromEntity(entityQuiz.orElse(null));
     }
 
     public Quiz addScore(String quizId, String userId, Integer score){
@@ -83,6 +83,18 @@ public class QuizService {
         return SubjectMapper.INSTANCE.fromEntity(subject);
     }
 
+    public List<Quiz> getCompletedQuizzesByUser(String userId) {
+        List<QuizEntity> quizzes = repository.findAll();
+        List<Quiz> allQuizzes = quizzes.stream().map(QuizMapper.INSTANCE::fromEntity).collect(Collectors.toList());
+        List<Quiz> onlyYourQuizzes = new ArrayList<Quiz>();
+        for(Quiz quiz : allQuizzes){
+            if(quiz.getScore() != null && quiz.getScore().get(userId) != null){
+                onlyYourQuizzes.add(quiz);
+            }
+        }
+        return onlyYourQuizzes;
+    }
+    public Quiz addReport(String quizId, int index,String report){
     public User addReport(String quizId, int index, String userId, String report){
         Optional<UserEntity> user = userRepo.findById(userId);
         UserEntity newUser = null;

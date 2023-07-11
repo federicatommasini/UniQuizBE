@@ -35,7 +35,11 @@ public class QuizController {
     }
 
     @PostMapping("/addReport/{quizId}/{index}/{userId}")
-    public User addReport(@PathVariable String quizId, @PathVariable int index , @PathVariable String userId, @RequestBody String report){
-        return service.addReport(quizId,index,userId, report);
+    public User addReport(@PathVariable String quizId, @PathVariable int index , @PathVariable String userId, @RequestBody String report) {
+        return service.addReport(quizId, index, userId, report);
+    }
+    @GetMapping("/completedQuizzes/{userId}")
+    public List<Quiz> getCompletedQuizzesByUser(@PathVariable String userId){
+        return service.getCompletedQuizzesByUser(userId);
     }
 }
