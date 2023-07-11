@@ -94,7 +94,6 @@ public class QuizService {
         }
         return onlyYourQuizzes;
     }
-    public Quiz addReport(String quizId, int index,String report){
     public User addReport(String quizId, int index, String userId, String report){
         Optional<UserEntity> user = userRepo.findById(userId);
         UserEntity newUser = null;
