@@ -83,7 +83,13 @@ public class QuizService {
         return SubjectMapper.INSTANCE.fromEntity(subject);
     }
 
-    public Quiz addReport(String quizId, int index,String report){
+    public User addReport(String quizId, int index, String userId, String report){
+        Optional<UserEntity> user = userRepo.findById(userId);
+        UserEntity newUser = null;
+        if(user.get()!=null){
+            user.get().setQuestionsReported(user.get().getQuestionsReported()+1);
+            newUser = userRepo.save(user.get());
+        }
         Quiz quiz = getQuizById(quizId);
         Question question = quiz.getQuestions().get(index);
         List<String> reports ;
@@ -94,7 +100,7 @@ public class QuizService {
         question.setReports(reports);
         quiz.getQuestions().set(index,question);
         repository.save(QuizMapper.INSTANCE.toEntity(quiz));
-        return quiz;
+        return UserMapper.INSTANCE.fromEntity(newUser);
     }
 
 }

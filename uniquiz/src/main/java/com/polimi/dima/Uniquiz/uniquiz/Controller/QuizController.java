@@ -1,9 +1,6 @@
 package com.polimi.dima.Uniquiz.uniquiz.Controller;
 
-import com.polimi.dima.Uniquiz.uniquiz.Model.NewQuestionRequest;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Question;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Quiz;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Subject;
+import com.polimi.dima.Uniquiz.uniquiz.Model.*;
 import com.polimi.dima.Uniquiz.uniquiz.Service.QuizService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +34,8 @@ public class QuizController {
         return service.addQuestion(request);
     }
 
-    @PostMapping("/addReport/{quizId}/{index}")
-    public Quiz addReport(@PathVariable String quizId, @PathVariable int index, @RequestBody String report){
-        return service.addReport(quizId,index,report);
+    @PostMapping("/addReport/{quizId}/{index}/{userId}")
+    public User addReport(@PathVariable String quizId, @PathVariable int index , @PathVariable String userId, @RequestBody String report){
+        return service.addReport(quizId,index,userId, report);
     }
 }
