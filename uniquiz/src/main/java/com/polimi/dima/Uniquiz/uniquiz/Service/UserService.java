@@ -32,7 +32,7 @@ public class UserService {
         user.setUsername(request.getUsername());
         user.setUniversityId(request.getUniversityName());
         user.setExams(Collections.emptyList());
-        user.setSchedules(Collections.emptyList());
+        //user.setSchedules(Collections.emptyList());
         user.setSubjectIds(Collections.emptyList());
         user.setProfilePicUrl(new String(""));
         user.setQuestionsAdded(0);

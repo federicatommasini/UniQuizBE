@@ -1,7 +1,5 @@
 package com.polimi.dima.Uniquiz.uniquiz.Domain;
 
-import com.polimi.dima.Uniquiz.uniquiz.Model.Exam;
-import com.polimi.dima.Uniquiz.uniquiz.Model.Schedule;
 import com.polimi.dima.Uniquiz.uniquiz.Model.UserExam;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +24,7 @@ public class UserEntity {
     private String universityId;
     private List<String> subjectIds;
     private List<UserExam> exams;
-    private List<Schedule> schedules;
+    //private List<Schedule> schedules;
     private String profilePicUrl;
     private int questionsAdded;
     private int questionsReported;

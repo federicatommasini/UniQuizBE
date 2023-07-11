@@ -44,17 +44,13 @@ public class SubjectService {
         return urls;
     }
     public void updateRanking(String subjectId, String userId){
-        System.out.println("subjectId "+subjectId);
-        System.out.println("userId "+userId);
         Subject subj = getSubjectById(subjectId);
         Map<String, Integer> ranking;
         if(null!= subj.getRanking())
             ranking = subj.getRanking();
         else ranking = new HashMap<>();
         List<String> quizIds = subj.getQuizIds();
-        System.out.println("quizIds "+quizIds);
         List<Quiz> quizzes = quizIds.stream().map(id -> quizService.getQuizById(id)).collect(Collectors.toList());
-        System.out.println("quizzes "+quizzes);
         float score = 0;
         float totalPoints = 0;
         float quizDone = 0;

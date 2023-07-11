@@ -24,7 +24,7 @@ public class User {
     private List<String> subjectIds;
     //private List<Exam> exams;
     private List<UserExam> exams;
-    private List<Schedule> schedules;
+    //private List<Schedule> schedules;
     private String profilePicUrl;
     private int questionsAdded;
     private int questionsReported;
