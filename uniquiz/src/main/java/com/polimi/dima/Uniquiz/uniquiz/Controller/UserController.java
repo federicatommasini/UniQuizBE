@@ -39,9 +39,9 @@ public class UserController {
         return service.login(loginRequest);
     }
 
-    @PutMapping("/{id}/pic")
-    public User uploadProfilePic(@PathVariable String id, @RequestBody User user){
-        return service.uploadPic(user);
+    @PutMapping("/pic/{userId}")
+    public User uploadProfilePic(@PathVariable String userId, @RequestBody String url){
+        return service.uploadPic(userId,url);
     }
 
     @GetMapping("/{id}/subjects")
@@ -54,9 +54,9 @@ public class UserController {
         return service.addSubject(subject, id);
     }
 
-    @PutMapping("/updateProfile/{id}")
-    public User updateProfile(@RequestBody User user, @PathVariable String id){
-        return service.updateProfile(user);
+    @PutMapping("/updateProfile/{userId}")
+    public User updateProfile( @RequestBody String pw, @PathVariable String userId){
+        return service.updateProfile(pw,userId);
     }
 
     @GetMapping("/completedSubjects/{userId}")

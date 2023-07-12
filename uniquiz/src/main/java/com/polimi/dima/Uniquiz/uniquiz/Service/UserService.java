@@ -1,5 +1,6 @@
 package com.polimi.dima.Uniquiz.uniquiz.Service;
 
+import ch.qos.logback.classic.Logger;
 import com.polimi.dima.Uniquiz.uniquiz.Domain.QuizEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Domain.UserEntity;
 import com.polimi.dima.Uniquiz.uniquiz.Mappers.QuizMapper;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -89,12 +91,22 @@ public class UserService {
         return user;
     }
 
-    public User updateProfile(User user) {
+    public User updateProfile(String pw, String userId) {
+        String str="" ;
+        if(pw.startsWith(""))
+            str = pw.substring(1,pw.length()-1);
+        User user = getUserById(userId);
+        user.setPassword(str);
         var savedEntity = repository.save(UserMapper.INSTANCE.toEntity(user));
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
 
-    public User uploadPic(User user) {
+    public User uploadPic(String userId, String url) {
+        String str="" ;
+        if(url.startsWith(""))
+            str = url.substring(1,url.length()-1);
+        User user = getUserById(userId);
+        user.setProfilePicUrl(str);
         var savedEntity = repository.save(UserMapper.INSTANCE.toEntity(user));
         return UserMapper.INSTANCE.fromEntity(savedEntity);
     }
@@ -111,7 +123,8 @@ public class UserService {
             examsAlreadyPresent.add(savedExam);
             user.setExams(examsAlreadyPresent);
         }
-        return updateProfile(user);
+        repository.save(UserMapper.INSTANCE.toEntity(user));
+        return user;
     }
 
     public int completedSubjectsUser(String userId) {
