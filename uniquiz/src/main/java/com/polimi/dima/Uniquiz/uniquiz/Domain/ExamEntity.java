@@ -1,24 +1,21 @@
 package com.polimi.dima.Uniquiz.uniquiz.Domain;
 
-import com.polimi.dima.Uniquiz.uniquiz.Model.Question;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "quizzes")
-public class QuizEntity {
-
+@Document(collection = "exams")
+public class ExamEntity {
     @Id
     private String id;
-    private String name;
-    private List<Question> questions;
-    private Map<String,Integer> score;
+    private String subjectId;
+    private Date date;
 }

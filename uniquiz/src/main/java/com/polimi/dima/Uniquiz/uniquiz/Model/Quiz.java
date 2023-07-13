@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -17,4 +18,5 @@ public class Quiz {
     private String id;
     private String name;
     private List<Question> questions;
+    private Map<String,Integer> score;
 }
